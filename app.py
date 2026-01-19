@@ -1,7 +1,7 @@
 """
 Rural Productivity Classifier - Aplicación de Machine Learning
 Clasifica organizaciones rurales según su nivel de productividad
-Versión optimizada para Render
+Versión optimizada para Render - SIN XGBoost
 """
 
 from flask import Flask, render_template, request
@@ -147,11 +147,12 @@ def entrenar_modelo(modelo_tipo, X_train, y_train):
         modelo.fit(X_train_scaled, y_train)
         necesita_escalado = True
         
-    else:  # Simple classifier como fallback
+    else:  # Fallback a Random Forest
         modelo = RandomForestClassifier(
-            n_estimators=50,
-            max_depth=3,
-            random_state=42
+            n_estimators=100,
+            max_depth=5,
+            random_state=42,
+            class_weight='balanced'
         )
         modelo.fit(X_train, y_train)
     
