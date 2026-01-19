@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Clasificador de Productividad Rural - Machine Learning</title>
+    <title>Clasificador de Productividad Rural</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -25,27 +24,11 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         
-        .header h1 {
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-        
-        .header p {
-            opacity: 0.9;
-            margin-bottom: 0;
-        }
-        
         .card {
             border: none;
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             margin-bottom: 1.5rem;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
         }
         
         .card-header {
@@ -54,44 +37,23 @@
             padding: 1rem 1.25rem;
             font-weight: 600;
             color: #2E7D32;
-            border-radius: 12px 12px 0 0 !important;
-        }
-        
-        .card-header .icon {
-            margin-right: 0.5rem;
-        }
-        
-        .card-body {
-            padding: 1.25rem;
         }
         
         .form-label {
             font-weight: 500;
             color: #495057;
             margin-bottom: 0.5rem;
-            font-size: 0.9rem;
         }
         
         .form-control, .form-select {
             border-radius: 8px;
             border: 1px solid #dee2e6;
             padding: 0.6rem 1rem;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
         
         .form-control:focus, .form-select:focus {
             border-color: #43A047;
             box-shadow: 0 0 0 0.2rem rgba(67, 160, 71, 0.15);
-        }
-        
-        .section-title {
-            color: #2E7D32;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #e9ecef;
         }
         
         .btn-primary {
@@ -100,7 +62,6 @@
             padding: 0.8rem 2rem;
             border-radius: 8px;
             font-weight: 600;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         
         .btn-primary:hover {
@@ -108,142 +69,76 @@
             box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
         }
         
-        .btn-primary:active {
-            transform: translateY(0);
-        }
-        
-        .result-card {
-            text-align: center;
-            padding: 2rem;
-        }
-        
-        .result-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-        
-        .result-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-        
-        .result-message {
-            color: #6c757d;
-            font-size: 1rem;
-        }
-        
         .info-box {
             background-color: #e8f5e9;
             border-radius: 8px;
             padding: 1rem;
-            margin-bottom: 1rem;
             border-left: 4px solid #2E7D32;
         }
         
-        .info-box p {
-            margin-bottom: 0;
-            color: #2E7D32;
-            font-size: 0.9rem;
-        }
-        
-        .data-summary {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 1rem;
-            font-size: 0.85rem;
-        }
-        
-        .data-summary dt {
-            color: #6c757d;
-            font-size: 0.8rem;
-        }
-        
-        .data-summary dd {
-            color: #212529;
-            font-weight: 500;
-            margin-bottom: 0.25rem;
+        .result-box {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-align: center;
         }
         
         footer {
             background-color: #212529;
             color: #adb5bd;
             padding: 1.5rem 0;
-            margin-top: 2rem;
-        }
-        
-        .spinner-border {
-            width: 3rem;
-            height: 3rem;
+            margin-top: 3rem;
         }
     </style>
 </head>
 <body>
     <header class="header">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <h1>Clasificador de Productividad Rural</h1>
-                    <p>Sistema de Machine Learning para predecir niveles de productividad en organizaciones rurales</p>
-                </div>
-                <div class="col-md-4 text-md-end text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" viewBox="0 0 16 16" style="opacity: 0.8;">
-                        <path d="M2 10h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1zm9-9h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm0 9a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-3zm-9-9h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
-                        <path fill-rule="evenodd" d="M8 0a.5.5 0 0 1 .5.5v3.293l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 3.793V.5A.5.5 0 0 1 8 0zM4.5 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z"/>
-                    </svg>
-                </div>
-            </div>
+            <h1>🌾 Clasificador de Productividad Rural</h1>
+            <p>Sistema de análisis para organizaciones rurales</p>
         </div>
     </header>
 
     <div class="container">
         <div class="row">
+            <!-- FORMULARIO -->
             <div class="col-lg-8">
-                <form action="/predict" method="POST" id="predictionForm">
+                <form action="/predict" method="POST">
                     
+                    <!-- Modelo ML -->
                     <div class="card">
                         <div class="card-header">
-                            <span class="icon">⚙️</span> Configuración del Modelo
+                            ⚙️ Modelo de Machine Learning
                         </div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="modelo_ml" class="form-label">Seleccionar Modelo de Machine Learning</label>
-                                    <select class="form-select" id="modelo_ml" name="modelo_ml" required>
-                                        <option value="random_forest" {% if not modelo_seleccionado or modelo_seleccionado == 'random_forest' %}selected{% endif %}>Random Forest Classifier</option>
-                                        <option value="svm" {% if modelo_seleccionado == 'svm' %}selected{% endif %}>Support Vector Machine (SVM)</option>
-                                    </select>
-                                    <div class="form-text">El modelo se entrena con datos estáticos en cada predicción.</div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="info-box">
-                                        <p>ℹ️ <strong>Nota:</strong> Los modelos han sido entrenados con un dataset simulado de 6 organizaciones rurales. Los resultados son ilustrativos.</p>
-                                    </div>
-                                </div>
-                            </div>
+                            <label for="modelo_ml" class="form-label">Seleccionar Modelo</label>
+                            <select class="form-select" id="modelo_ml" name="modelo_ml" required>
+                                <option value="Random Forest">🌲 Random Forest Classifier</option>
+                                <option value="SVM">📊 Support Vector Machine (SVM)</option>
+                                <option value="XGBoost">🚀 XGBoost Classifier</option>
+                            </select>
                         </div>
                     </div>
 
+                    <!-- Variables Internas -->
                     <div class="card">
                         <div class="card-header">
-                            <span class="icon">🏢</span> Variables Internas de la Organización
+                            🏢 Variables Internas
                         </div>
                         <div class="card-body">
-                            <p class="section-title">Características organizacionales y demográficas</p>
-                            
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="indice_org" class="form-label">Índice de Desarrollo Organizacional (0-100)</label>
                                     <input type="number" class="form-control" id="indice_org" name="indice_org" 
-                                           min="0" max="100" value="{{ datos.indice_desarrollo_organizacional if datos else 50 }}" required>
-                                    <div class="form-text">Nivel de madurez y capacidad organizacional.</div>
+                                           min="0" max="100" value="50" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="nivel_educativo" class="form-label">Nivel Educativo Promedio</label>
                                     <select class="form-select" id="nivel_educativo" name="nivel_educativo" required>
-                                        <option value="1" {% if not datos or datos.nivel_educativo_promedio == 1 %}selected{% endif %}>1 - Primaria</option>
-                                        <option value="2" {% if datos and datos.nivel_educativo_promedio == 2 %}selected{% endif %}>2 - Secundaria</option>
-                                        <option value="3" {% if datos and datos.nivel_educativo_promedio == 3 %}selected{% endif %}>3 - Superior</option>
+                                        <option value="1">1 - Primaria</option>
+                                        <option value="2" selected>2 - Secundaria</option>
+                                        <option value="3">3 - Superior</option>
                                     </select>
                                 </div>
                             </div>
@@ -252,44 +147,127 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="pct_mujeres" class="form-label">Porcentaje de Mujeres (%)</label>
                                     <input type="number" class="form-control" id="pct_mujeres" name="pct_mujeres" 
-                                           min="0" max="100" value="{{ datos.porcentaje_mujeres if datos else 50 }}" required>
+                                           min="0" max="100" value="50" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="pct_varones" class="form-label">Porcentaje de Varones (%)</label>
                                     <input type="number" class="form-control" id="pct_varones" name="pct_varones" 
-                                           min="0" max="100" value="{{ datos.porcentaje_varones if datos else 50 }}" required>
+                                           min="0" max="100" value="50" required>
                                 </div>
                             </div>
                             
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="tipo_producto" class="form-label">Tipo de Producto Principal</label>
+                                    <label for="tipo_producto" class="form-label">Tipo de Producto</label>
                                     <select class="form-select" id="tipo_producto" name="tipo_producto" required>
-                                        <option value="Cafe" {% if not datos or datos.producto == 'Cafe' %}selected{% endif %}>Café</option>
-                                        <option value="Leche" {% if datos and datos.producto == 'Leche' %}selected{% endif %}>Leche</option>
-                                        <option value="Palta" {% if datos and datos.producto == 'Palta' %}selected{% endif %}>Palta</option>
+                                        <option value="Cafe" selected>☕ Café</option>
+                                        <option value="Leche">🥛 Leche</option>
+                                        <option value="Palta">🥑 Palta</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Variables Externas -->
                     <div class="card">
                         <div class="card-header">
-                            <span class="icon">🌍</span> Variables Externas del Entorno
+                            🌍 Variables Externas
                         </div>
                         <div class="card-body">
-                            <p class="section-title">Factores externos que afectan la productividad</p>
-                            
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="tiempo_ejecucion" class="form-label">Tiempo de Ejecución del Plan (meses)</label>
+                                    <label for="tiempo_ejecucion" class="form-label">Tiempo de Ejecución (meses)</label>
                                     <input type="number" class="form-control" id="tiempo_ejecucion" name="tiempo_ejecucion" 
-                                           min="1" max="60" value="{{ datos.tiempo_ejecucion_meses if datos else 12 }}" required>
+                                           min="1" max="60" value="12" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="brecha_territorial" class="form-label">Brecha Territorial</label>
                                     <select class="form-select" id="brecha_territorial" name="brecha_territorial" required>
-                                        <option value="baja" {% if not datos or datos.brecha_territorial == 'baja' %}selected{% endif %}>Baja</option>
-                                        <option value="media" {% if datos and datos.brecha_territorial == 'media' %}selected{% endif %}>Media</option>
-                                        <option value="alta" {% if datos and datos
+                                        <option value="baja">Baja</option>
+                                        <option value="media" selected>Media</option>
+                                        <option value="alta">Alta</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="precipitacion" class="form-label">Precipitación (mm)</label>
+                                    <input type="number" class="form-control" id="precipitacion" name="precipitacion" 
+                                           min="0" max="5000" value="1000" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="temperatura" class="form-label">Temperatura (°C)</label>
+                                    <input type="number" class="form-control" id="temperatura" name="temperatura" 
+                                           min="-10" max="50" step="0.1" value="20" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="sequia" class="form-label">Nivel de Sequía</label>
+                                    <select class="form-select" id="sequia" name="sequia" required>
+                                        <option value="0" selected>Ninguna</option>
+                                        <option value="1">Moderada</option>
+                                        <option value="2">Severa</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botón -->
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                📊 Analizar Datos
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- PANEL LATERAL -->
+            <div class="col-lg-4">
+                {% if mensaje %}
+                <div class="result-box">
+                    <h3>✅ {{ mensaje }}</h3>
+                    <hr>
+                    <p><strong>Modelo:</strong> {{ datos.modelo }}</p>
+                    <p><strong>Producto:</strong> {{ datos.producto }}</p>
+                    <p><strong>Índice Org:</strong> {{ datos.indice_org }}</p>
+                </div>
+                {% endif %}
+
+                {% if error %}
+                <div class="alert alert-danger">
+                    ❌ Error: {{ error }}
+                </div>
+                {% endif %}
+
+                <div class="card">
+                    <div class="card-header">
+                        ℹ️ Información
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Propósito:</strong> Formulario de análisis de productividad rural.</p>
+                        <p><strong>Modelos disponibles:</strong></p>
+                        <ul class="small">
+                            <li>🌲 Random Forest</li>
+                            <li>📊 Support Vector Machine</li>
+                            <li>🚀 XGBoost</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container text-center">
+            <p class="mb-0">🌾 Clasificador de Productividad Rural</p>
+            <p class="mb-0 small">Interfaz de demostración</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
