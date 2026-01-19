@@ -129,16 +129,20 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="indice_org" class="form-label">Índice de Desarrollo Organizacional (0-100)</label>
-                                    <input type="number" class="form-control" id="indice_org" name="indice_org" 
-                                           min="0" max="100" value="50" required>
+                                    <label for="indice_org" class="form-label">Índice de Desarrollo Organizacional</label>
+                                    <select class="form-select" id="indice_org" name="indice_org" required>
+                                        <option value="A">A - Alto</option>
+                                        <option value="B" selected>B - Medio</option>
+                                        <option value="C">C - Bajo</option>
+                                    </select>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="nivel_educativo" class="form-label">Nivel Educativo Promedio</label>
                                     <select class="form-select" id="nivel_educativo" name="nivel_educativo" required>
-                                        <option value="1">1 - Primaria</option>
-                                        <option value="2" selected>2 - Secundaria</option>
-                                        <option value="3">3 - Superior</option>
+                                        <option value="0">Sin estudios</option>
+                                        <option value="1">Primaria</option>
+                                        <option value="2" selected>Secundaria</option>
+                                        <option value="3">Superior</option>
                                     </select>
                                 </div>
                             </div>
@@ -149,14 +153,6 @@
                                     <input type="number" class="form-control" id="pct_mujeres" name="pct_mujeres" 
                                            min="0" max="100" value="50" required>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="pct_varones" class="form-label">Porcentaje de Varones (%)</label>
-                                    <input type="number" class="form-control" id="pct_varones" name="pct_varones" 
-                                           min="0" max="100" value="50" required>
-                                </div>
-                            </div>
-                            
-                            <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="tipo_producto" class="form-label">Tipo de Producto</label>
                                     <select class="form-select" id="tipo_producto" name="tipo_producto" required>
@@ -182,33 +178,23 @@
                                            min="1" max="60" value="12" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="brecha_territorial" class="form-label">Brecha Territorial</label>
-                                    <select class="form-select" id="brecha_territorial" name="brecha_territorial" required>
-                                        <option value="baja">Baja</option>
-                                        <option value="media" selected>Media</option>
-                                        <option value="alta">Alta</option>
-                                    </select>
+                                    <label for="precipitacion" class="form-label">Precipitación Anual (mm)</label>
+                                    <input type="number" class="form-control" id="precipitacion" name="precipitacion" 
+                                           min="0" max="5000" value="1000" required>
                                 </div>
                             </div>
                             
                             <div class="row">
-                                <div class="col-md-4 mb-3">
-                                    <label for="precipitacion" class="form-label">Precipitación (mm)</label>
-                                    <input type="number" class="form-control" id="precipitacion" name="precipitacion" 
-                                           min="0" max="5000" value="1000" required>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="temperatura" class="form-label">Temperatura (°C)</label>
+                                <div class="col-md-6 mb-3">
+                                    <label for="temperatura" class="form-label">Temperatura Promedio (°C)</label>
                                     <input type="number" class="form-control" id="temperatura" name="temperatura" 
                                            min="-10" max="50" step="0.1" value="20" required>
                                 </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="sequia" class="form-label">Nivel de Sequía</label>
-                                    <select class="form-select" id="sequia" name="sequia" required>
-                                        <option value="0" selected>Ninguna</option>
-                                        <option value="1">Moderada</option>
-                                        <option value="2">Severa</option>
-                                    </select>
+                                <div class="col-md-6 mb-3">
+                                    <label for="sequia" class="form-label">Nivel de Sequía (mm)</label>
+                                    <input type="number" class="form-control" id="sequia" name="sequia" 
+                                           min="0" max="1000" step="0.1" value="0" required>
+                                    <div class="form-text small">Ingrese el déficit hídrico en milímetros</div>
                                 </div>
                             </div>
                         </div>
@@ -232,8 +218,14 @@
                     <h3>✅ {{ mensaje }}</h3>
                     <hr>
                     <p><strong>Modelo:</strong> {{ datos.modelo }}</p>
-                    <p><strong>Producto:</strong> {{ datos.producto }}</p>
                     <p><strong>Índice Org:</strong> {{ datos.indice_org }}</p>
+                    <p><strong>Nivel Educativo:</strong> {{ datos.nivel_educativo }}</p>
+                    <p><strong>Producto:</strong> {{ datos.producto }}</p>
+                    <p><strong>% Mujeres:</strong> {{ datos.pct_mujeres }}%</p>
+                    <p><strong>Tiempo:</strong> {{ datos.tiempo_ejecucion }} meses</p>
+                    <p><strong>Precipitación:</strong> {{ datos.precipitacion }} mm</p>
+                    <p><strong>Temperatura:</strong> {{ datos.temperatura }} °C</p>
+                    <p><strong>Sequía:</strong> {{ datos.sequia }} mm</p>
                 </div>
                 {% endif %}
 
@@ -255,6 +247,15 @@
                             <li>📊 Support Vector Machine</li>
                             <li>🚀 XGBoost</li>
                         </ul>
+                        <hr>
+                        <p class="small text-muted mb-0">
+                            <strong>Variables evaluadas:</strong><br>
+                            • Índice organizacional (A, B, C)<br>
+                            • Nivel educativo<br>
+                            • Composición de género<br>
+                            • Condiciones climáticas<br>
+                            • Tiempo de ejecución
+                        </p>
                     </div>
                 </div>
             </div>
