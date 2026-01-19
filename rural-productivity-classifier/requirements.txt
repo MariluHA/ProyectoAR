@@ -1,0 +1,19 @@
+# Dependencias del proyecto Clasificador de Productividad Rural
+# Versiones compatibles con Python 3.9+ y Render
+
+# Framework web
+Flask==3.0.0
+
+# Servidor de producción para Render
+gunicorn==21.2.0
+
+# Machine Learning
+scikit-learn==1.3.2
+xgboost==2.0.3
+
+# Manipulación de datos
+pandas==2.1.4
+numpy==1.26.2
+
+# Compatibilidad
+Werkzeug==3.0.1
